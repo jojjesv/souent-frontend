@@ -1,4 +1,5 @@
 import * as React from 'react';
+import CardList from './common/card_list';
 
 /**
  * Top level app component.
@@ -8,7 +9,13 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello</h1>
+        <CardList
+          data={[
+            {
+              header: 'Card 1'
+            }
+          ]}
+        />
       </div>
 
     )
