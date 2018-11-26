@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import CardHead from "./common/card/CardHead";
-import CardList from "./common/card/CardList";
+import CardList from "./common/cardlist/CardList";
 
 function DrawFView(props){
     return <>
