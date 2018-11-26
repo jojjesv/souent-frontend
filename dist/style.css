@@ -8,30 +8,6 @@ body{
     grid-template-columns: 5px auto 5px;
     grid-template-rows: 80px auto;
 }
-.head_rub {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-}
-.head_img {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-}
-.head_card {
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 15px;
-    height: 200px;
-    display: grid;
-    grid-template-columns: 50px auto;
-    grid-template-rows: 50px auto;
-}
 .content_con {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
