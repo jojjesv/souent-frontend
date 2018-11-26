@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import CardHead from "./common/card/CardHead";
-import CardList from "./common/cardlist/CardList";
+import CardHead from "./common/cardhead";
+import CardList from "./common/cardlist";
 
 function DrawFView(props){
     return <>
         <CardHead cimg="../images/ruter.jpg" htext="Head"/>
-        <CardList dTop={80} dAdd={5} cHeight={500} imgDeg={0}/>
+        <CardList dTop={80} dAdd={5} cHeight={500}/>
     </>
 }
 function DrawAllFView(props){
