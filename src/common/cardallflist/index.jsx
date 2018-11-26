@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../card";
 
-var deck = [
+var deckAllF = [
     {
         "h": "företag",
         "p": "info om företag"
@@ -40,12 +40,12 @@ var deck = [
     }
 ]
 
-export default class CardList extends React.Component
+export default class CardAllFList extends React.Component
 {
     render() {
         let cards = [];
-        for (let i = 0; i < deck.length; i++) {
-            cards.push(<Card key={i} ch={this.props.cHeight} deg={"rotate(" + this.props.imgDeg + "deg)"} cimg={`../images/${this.cardType(i)}.jpg`} dt={this.props.dTop + i * this.props.dAdd} htext={deck[i].h} ptext={deck[i].p}/>);
+        for (let i = 0; i < deckAllF.length; i++) {
+            cards.push(<Card key={i} id={i} ch={this.props.cHeight} deg={"rotate(" + this.props.imgDeg + "deg)"} cimg={`../images/${this.cardType(i)}.jpg`} dt={this.props.dTop + i * this.props.dAdd} htext={deckAllF[i].h} ptext={deckAllF[i].p}/>);
         }
         return <div className="content_con">
             {cards}
