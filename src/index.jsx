@@ -7,13 +7,13 @@ import DefaultRouter from './DefaultRouter'
 
 function DrawFView(props){
     return <>
-        <CardHead cimg="../images/ruter.jpg" htext={"företag" + props.btId}/>
+        <CardHead cimg="assets/images/ruter.jpg" htext={"företag" + props.btId}/>
         <CardFList dTop={80} dAdd={5} cHeight={500}/>
     </>
 }
 export function DrawAllFView(props){
     return <>
-        <CardHead cimg="../images/ruter.jpg" htext="Företag"/>
+        <CardHead cimg="assets/images/ruter.jpg" htext="Företag"/>
         <CardAllFList dTop={80} dAdd={5} cHeight={200} imgDeg={270}/>
     </>
 }

@@ -10,7 +10,7 @@ export default class CardList extends React.Component {
 
     let cards = [];
     for (let i = 0; i < deckF.length; i++) {
-      cards.push(<Card key={i} id={i} ch={this.props.cHeight} deg={"rotate(" + this.props.imgDeg + "deg)"} cimg={`../images/${this.cardType(i)}.jpg`} dt={this.props.dTop + i * this.props.dAdd} htext={deckF[i].h} ptext={deckF[i].p} />);
+      cards.push(<Card key={i} id={i} ch={this.props.cHeight} deg={"rotate(" + this.props.imgDeg + "deg)"} cimg={`assets/images/${this.cardType(i)}.jpg`} dt={this.props.dTop + i * this.props.dAdd} htext={deckF[i].h} ptext={deckF[i].p} />);
     }
     return (
       <div className="content_con">
