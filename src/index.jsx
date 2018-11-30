@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import CardHead from "./common/cardhead";
+import CardAllFList from './common/cardallflist';
 import DefaultRouter from './DefaultRouter'
 
 function DrawFView(props){
