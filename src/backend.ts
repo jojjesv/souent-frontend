@@ -13,7 +13,7 @@ let baseUrl = `http://localhost:3000/api`;
  * Performs a standard backend request.
  * Expects the result as JSON!
  */
-export async function request(path: string, method: 'get'|'post'|'put'|'delete', body: any = null, query: string = null) {
+export async function request(path: string, method: 'get'|'post'|'put'|'delete' = 'get', body: any = null, query: string = null) {
   path = path || "";
   query = query || "";
 
