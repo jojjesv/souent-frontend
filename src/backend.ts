@@ -7,7 +7,7 @@
 //@ts-ignore
 import fetch from 'whatwg-fetch';
 
-let baseUrl = `http://localhost:3000/api/`;
+let baseUrl = `http://localhost:3000/api`;
 
 /**
  * Performs a standard backend request.
@@ -17,8 +17,8 @@ export async function request(path: string, method: 'get'|'post'|'put'|'delete',
   path = path || "";
   query = query || "";
 
-  if (path.startsWith("/")) {
-    path = path.substr(1);
+  if (!path.startsWith("/")) {
+    path = `/${path}`;
   }
 
   if (!query.startsWith("?")) {
