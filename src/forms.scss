@@ -1,4 +1,13 @@
 /* Form styles */
-input[type="text"] {
-  width: 280px;
+input {
+  &[type="text"],
+  &[type="email"],
+  &[type="password"] {
+    width: 280px;
+  }
+}
+
+fieldset {
+  border: none;
+  outline: none;
 }
