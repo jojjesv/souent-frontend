@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "es2015.promise"],
+    "lib": ["es2015", "es2015.promise", "dom"],
     "jsx": "react"
   }
 }

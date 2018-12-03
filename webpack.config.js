@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     mode: "development",
     devtool: "inline-source-map",
@@ -21,5 +23,11 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".jsx", ".tsx", ".ts"]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        historyApiFallback: {
+            index: 'index.html'
+        }
     }
 }
