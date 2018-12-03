@@ -5,6 +5,7 @@ import {
 import BMCScreen from './bmc/screen';
 import EnterprisesScreen from './enterprises/screen';
 import SignInScreen from './sign_in/screen';
+import EnterpriseFormScreen from './enterprise_form/screen';
 
 /**
  * Main/default router component.
@@ -15,6 +16,7 @@ export default () => (
     <Switch>
       <Route exact path="/" component={EnterprisesScreen} />
       <Route exact path="/sign_in" component={SignInScreen} />
+      <Route exact path="/enterprise/new" component={EnterpriseFormScreen} />
       <Route exact path="/bmc/:enterpriseId" component={BMCScreen} />
     </Switch>
   </BrowserRouter>

@@ -1,0 +1,13 @@
+#member-list {
+  .member-item {
+    display: grid;
+    grid-template-columns: 36px 320px 36px;
+    justify-items: center;
+
+    div {
+      &:nth-child(2) input {
+        width: 100%;
+      }
+    }
+  }
+}

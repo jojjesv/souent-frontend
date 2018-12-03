@@ -2,9 +2,10 @@ import * as React from 'react';
 import MemberData from './models/MemberData';
 import * as FormData from 'form-data'
 import { submitEnterprise } from './service';
+import './styles.scss';
 
 class State {
-  members: MemberData[];
+  members: MemberData[] = [];
   busySubmitting: boolean;
 }
 
@@ -12,7 +13,7 @@ class State {
  * Form for creating an enterprise.
  * @author Johan Svensson
  */
-export default class EnterpriseForm extends React.PureComponent<any, State> {
+export default class EnterpriseForm extends React.Component<any, State> {
   state = new State();
 
   /**
@@ -41,7 +42,11 @@ export default class EnterpriseForm extends React.PureComponent<any, State> {
   }
 
   addMember() {
-
+    this.setState(o => {
+      o.members.push(new MemberData());
+      console.log("Members: ", o.members);
+      return o;
+    })
   }
 
   removeMemberAt(index: number) {
@@ -82,10 +87,10 @@ export default class EnterpriseForm extends React.PureComponent<any, State> {
             <p>Members may edit this enterprise's business model canvas (BMC) info.</p>
 
             <div>
-              <ul id="members-list">
+              <ul id="member-list">
                 {
                   state.members.map((member, i) => (
-                    <li>
+                    <li className="member-item">
                       <div>
                         <span className="fas fa-envelope"></span>
                       </div>
@@ -105,7 +110,10 @@ export default class EnterpriseForm extends React.PureComponent<any, State> {
                 }
               </ul>
               <div>
-                <button onClick={() => this.addMember()}>
+                <button onClick={e => {
+                  e.preventDefault();
+                  this.addMember();
+                }}>
                   Add member
                 </button>
               </div>
