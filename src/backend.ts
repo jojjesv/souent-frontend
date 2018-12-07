@@ -5,9 +5,9 @@
 ;
 
 //@ts-ignore
-import fetch from 'whatwg-fetch';
+//import fetch from 'whatwg-fetch';
 
-let baseUrl = `http://localhost:3000/api`;
+let baseUrl = `http://localhost:8004/api`;
 
 /**
  * Performs a standard backend request.
@@ -36,6 +36,9 @@ export async function request(path: string, method: 'get'|'post'|'put'|'delete' 
   let url = `${baseUrl}${path}${query}`;
   let result = await fetch(url, {
     method,
+    headers: {
+      "Content-Type": "application/json"
+    },
     body
   });
 
