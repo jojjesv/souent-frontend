@@ -21,7 +21,7 @@ export default class CardList extends React.Component {
         ptext={cardsData[i].htmlPreviewContent} />);
     }
     return (
-      <div className="content_con">
+      <div className="card-container">
         {cards}
       </div>
     )
