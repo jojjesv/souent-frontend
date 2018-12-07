@@ -7,7 +7,7 @@ export default function Card(props){
         <img src={props.cimg} className="symbol top-left"></img>
         <h1 className="header" id="b2">{props.htext}</h1>
         <p className="preview-content" id="b3">{props.ptext}</p>
-        <button className="open" value={props.id}>Open</button>
+        <button className="open" value={props.id} onClick={props.onOpen}>Open</button>
         <img src={props.cimg} className="symbol bottom-right" style={{transform: props.deg}}></img>
     </div>
 }

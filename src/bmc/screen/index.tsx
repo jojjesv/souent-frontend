@@ -3,10 +3,15 @@ import { fetchBmc } from './service';
 import BMCCard from '../../models/BMCCard';
 import { RouteComponentProps } from 'react-router';
 import CardList from '../../common/card_list/index.jsx'
+import CardDetailModal from '../card_detail';
 
 class State {
   busyFetchingBmc = false;
   cards: BMCCard[] = [];
+  cardDetailVisible: boolean;
+
+  //  Current card data for card detail view
+  cardDetailData: BMCCard;
 }
 
 interface Props extends RouteComponentProps {
@@ -70,6 +75,10 @@ export default class BMCScreen extends React.Component<Props, State> {
             <CardList data={state.cards} />
           ) : null
         }
+        <CardDetailModal
+          visible={state.cardDetailVisible}
+          data={state.cardDetailData}
+        />
       </div>
     )
   }

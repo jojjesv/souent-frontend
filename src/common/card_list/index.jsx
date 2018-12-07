@@ -18,6 +18,7 @@ export default class CardList extends React.Component {
         cimg={`assets/images/${this.cardType(i)}.jpg`}
         dt={this.props.dTop + i * this.props.dAdd}
         htext={cardsData[i].title}
+        onOpen={() => props.onCardOpen(cardsData[i], i)}
         ptext={cardsData[i].htmlPreviewContent} />);
     }
     return (
