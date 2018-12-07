@@ -17,8 +17,10 @@
     height: $card-height;
     transition: all 250ms;
 
+    z-index: 1;
+
     &:hover {
-      z-index: 99;
+      z-index: 2;
       box-shadow: 0 0 24px rgba(20, 20, 20, 0.1);
     }
 
