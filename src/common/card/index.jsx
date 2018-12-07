@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import "./style_desktop.scss";
 
 export default function Card(props){
     return <div className="card" style={{top: props.dt, height: props.ch}}>
