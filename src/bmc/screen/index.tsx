@@ -2,10 +2,11 @@ import * as React from 'react';
 import { fetchBmc } from './service';
 import BMCCard from '../../models/BMCCard';
 import { RouteComponentProps } from 'react-router';
+import CardList from '../../common/card_list/index.jsx'
 
 class State {
   busyFetchingBmc = false;
-  cards: BMCCard[];
+  cards: BMCCard[] = [];
 }
 
 interface Props extends RouteComponentProps {
@@ -61,7 +62,14 @@ export default class BMCScreen extends React.Component<Props, State> {
 
     return (
       <div>
-
+        {
+          state.busyFetchingBmc ? (
+            <div>
+            </div>
+          ) : state.cards.length ? (
+            <CardList data={state.cards} />
+          ) : null
+        }
       </div>
     )
   }

@@ -116,7 +116,11 @@ export default class EnterpriseForm extends React.Component<any, State> {
               <h2 className="title is-4 is-centered">Basic info</h2>
               <div>
                 <label>
-                  <input type="file" name="logo" id="input-logo"
+                  <input
+                    type="file"
+                    name="logo"
+                    id="input-logo"
+                    className="hidden"
                     onChange={e => this.onLogoFileChanged(e.currentTarget.files[0])} />
 
                   <div id="logo-preview"
@@ -124,7 +128,11 @@ export default class EnterpriseForm extends React.Component<any, State> {
                     style={state.logoSrc ? {
                       backgroundImage: `url(${state.logoSrc})`
                     } : null}>
-                    <p id="logo-upload-hint">Upload your logo</p>
+                    {
+                      !state.logoSrc ? (
+                        <p id="logo-upload-hint">Upload your logo</p>
+                      ) : null
+                    }
                   </div>
                 </label>
               </div>
@@ -135,9 +143,9 @@ export default class EnterpriseForm extends React.Component<any, State> {
                   maxLength={30}
                   onChange={() => this.checkFormValidity()}
                   name="name"
-                  className="input"
+                  className="input is-medium is-centered"
                   required={true}
-                  placeholder="Name of your enterprise"
+                  placeholder="Enterprise name"
                 />
               </div>
               <div>
@@ -165,42 +173,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
                 <ul id="member-list">
                   {
                     [{ email: 'jojjedeveloper@gmail.com' }].concat(state.members).map((member, i) => {
-                      let isMe = i == 0;
-
-                      return (
-                        <li className="member-item" key={member.email} ref={e => { }}>
-                          <div>
-                            <span className="fas fa-envelope"></span>
-                          </div>
-                          <div>
-                            <input
-                              className="input"
-                              ref={e => e && (e.value = `${member.email || ""}${isMe ? " (me)" : ""}`)}
-                              type="email"
-                              required={true}
-                              disabled={isMe}
-                              name={`member${i}`}
-                              onChange={e => {
-                                member.email = e.currentTarget.value.trim();
-                                this.checkFormValidity();
-                              }} />
-                          </div>
-                          <div>
-                            {
-                              !isMe ? (
-                                <button
-                                  className="remove-member"
-                                  onClick={e => {
-                                    e.preventDefault();
-                                    this.removeMemberAt(i - 1);
-                                  }}>
-                                  <span className="fas fa-minus-circle"></span>
-                                </button>
-                              ) : null
-                            }
-                          </div>
-                        </li>
-                      )
+                      
                     })
                   }
                 </ul>
@@ -208,6 +181,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
                   {
                     state.members.length < maxMemberCount - 1 ? (
                       <button
+                        id="add-member"
                         className="button"
                         onClick={e => {
                           e.preventDefault();

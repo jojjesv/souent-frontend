@@ -6,6 +6,7 @@ import BMCCard from "../../models/BMCCard";
 export async function fetchBmc(publicEnterpriseId: string): Promise<BMCCard[]> {
   return [{
     htmlContent: `<p>Hello</p>`,
+    htmlPreviewContent: `<p>Hello</p>`,
     title: 'test',
     symbolImageUrl: 'test.jpg'
   }]

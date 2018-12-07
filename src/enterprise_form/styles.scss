@@ -32,6 +32,20 @@
   }
 }
 
+#input-enterprise-name {
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #adadad;
+  box-shadow: none;
+  background: none;
+  margin-bottom: 24px;
+  border-radius: 1px;
+}
+
+#add-member {
+  margin-top: 8px;
+}
+
 #member-list {
   .member-item {
     display: grid;
