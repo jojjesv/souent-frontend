@@ -1,6 +1,7 @@
 import * as React from 'react';
 import BMCCard from '../../models/BMCCard';
 import './styles.scss';
+import classNames from 'classnames';
 
 interface Props {
   visible: boolean;
@@ -10,6 +11,7 @@ interface Props {
 
 class State {
   fullyVisible: boolean;
+  dismissing: boolean;
 }
 
 /**
@@ -19,8 +21,26 @@ class State {
 export default class CardDetailModal extends React.Component<Props, State> {
   state = new State();
 
+  dimiss() {
+    if (this.state.dismissing) {
+      //  Already dismissing
+      return;
+    }
+
+    this.setState({
+      dismissing: true
+    });
+
+    const animDuration = 350;
+
+    setTimeout(() => {
+      this.state.dismissing = false;
+      this.props.onRequestClose();
+    }, animDuration);
+  }
+
   render() {
-    let { props } = this;
+    let { props, state } = this;
 
     if (!props.visible) {
       return null;
@@ -29,12 +49,15 @@ export default class CardDetailModal extends React.Component<Props, State> {
     let { data } = props;
 
     return (
-      <div className="card-detail" onClick={() => props.onRequestClose()}>
+      <div className={classNames({
+        "card-detail": true,
+        "dismissing": state.dismissing
+      })} onClick={() => this.dimiss()}>
         <div className="base" onClick={e => e.stopPropagation()}>
           <div className="options">
             <ul>
               <li>
-                <button className="reset" onClick={() => props.onRequestClose()}>
+                <button className="reset" onClick={() => this.dimiss()}>
                   <img className="btn-icon" alt="Close" src={"../assets/images/ic_close.png"} />
                 </button>
               </li>

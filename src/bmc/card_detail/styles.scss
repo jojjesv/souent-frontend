@@ -11,9 +11,19 @@
   text-align: center;
 
   $animation-dur: 500ms;
+  $animation-dur-disappear: 350ms;
   $animation-easing: cubic-bezier(0.23, 1, 0.32, 1);
+  $animation-easing-disappear: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 
-  animation: card-detail-container-appear $animation-dur $animation-easing;
+  animation: card-detail-container-appear $animation-dur $animation-easing both;
+
+  &.dismissing {
+    animation: card-detail-container-disappear $animation-dur-disappear $animation-easing-disappear both;
+
+    .base {
+      animation: card-detail-base-disappear $animation-dur-disappear $animation-easing-disappear both;
+    }
+  }
 
   .base {
     width: 50%;
@@ -27,7 +37,7 @@
     transform: translateX(-50%);
     text-align: left;
     min-height: #{50vw / $card-ratio};
-    animation: card-detail-base-appear $animation-dur $animation-easing;
+    animation: card-detail-base-appear $animation-dur $animation-easing both;
   }
 
   .header-container {
@@ -90,6 +100,26 @@
   }
 
   to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes card-detail-container-disappear {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes card-detail-base-disappear {
+  to {
+    transform: translateX(-50%) translateY(10vh);
+  }
+
+  from {
     transform: translateX(-50%);
   }
 }
