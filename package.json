@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@types/form-data": "^2.2.1",
+    "@types/gapi": "0.0.36",
     "@types/react": "^16.7.7",
     "@types/react-router": "^4.4.1",
     "@types/react-router-dom": "^4.3.1",
@@ -35,6 +36,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "googleapis": "^35.0.0",
     "classnames": "^2.2.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
