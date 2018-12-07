@@ -8,3 +8,10 @@ ul {
   max-width: 960px;
   margin: auto;
 }
+
+/* Reset default button style */
+button.reset {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+}

@@ -1,4 +1,21 @@
 /* Form styles */
-input[type="text"] {
-  width: 280px;
+input {
+  &[type="text"],
+  &[type="email"],
+  &[type="password"] {
+    width: 280px;
+  }
+}
+
+/* For file inputs etc. */
+.hidden {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  left: -100vw;
+}
+
+fieldset {
+  border: none;
+  outline: none;
 }

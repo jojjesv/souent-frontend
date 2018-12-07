@@ -1,13 +1,56 @@
+#enterprise-add-form {
+  text-align: center;
+
+  .fieldsets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+#logo-preview {
+  $size: 180px;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: #fafafa;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  display: grid;
+  margin: auto;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 250ms;
+
+  /* click */
+  &:hover {
+    box-shadow: 0 4px 36px rgba(0, 0, 0, 0.15);
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+}
+
+#input-enterprise-name {
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #adadad;
+  box-shadow: none;
+  background: none;
+  margin-bottom: 24px;
+  border-radius: 1px;
+}
+
+#add-member {
+  margin-top: 8px;
+}
+
 #member-list {
   .member-item {
     display: grid;
-    grid-template-columns: 36px 320px 36px;
+    grid-template-columns: auto auto 36px;
     justify-items: center;
-
-    div {
-      &:nth-child(2) input {
-        width: 100%;
-      }
-    }
+    align-items: center;
   }
 }
