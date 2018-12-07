@@ -81,6 +81,7 @@ export default class BMCScreen extends React.Component<Props, State> {
         <CardDetailModal
           visible={state.cardDetailVisible}
           data={state.cardDetailData}
+          onRequestClose={() => this.setState({ cardDetailVisible: false })}
         />
       </div>
     )

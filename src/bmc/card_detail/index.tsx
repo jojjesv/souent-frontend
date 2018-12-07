@@ -5,6 +5,7 @@ import './styles.scss';
 interface Props {
   visible: boolean;
   data: BMCCard;
+  onRequestClose: () => void;
 }
 
 class State {
@@ -28,8 +29,8 @@ export default class CardDetailModal extends React.Component<Props, State> {
     let { data } = props;
 
     return (
-      <div className="card-detail">
-        <div className="base">
+      <div className="card-detail" onClick={() => props.onRequestClose()}>
+        <div className="base" onClick={e => e.stopPropagation()}>
           <div className="header-container">
             <img alt="symbol" className="symbol" />
             <h1 className="header">{data.title}</h1>
