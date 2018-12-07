@@ -10,40 +10,65 @@
     margin: auto;
   }
 
-  .card {
-    $card-width: 240px;
+  $card-width: 240px;
+  $card-height: #{$card-width / $card-ratio};
+  
+  .card-container-single {
+    height: $card-height;
+    transition: all 250ms;
 
-    width: $card-width;
-    height: #{$card-width / $card-ratio};
-
-    position: relative;
+    &:hover {
+      z-index: 99;
+      box-shadow: 0 0 24px rgba(20, 20, 20, 0.1);
+    }
 
     &:nth-child(1) {
-      transform: rotate(1.5deg);
+      .card {
+        transform: rotate(1.5deg);
+      }
     }
 
     &:nth-child(2) {
-      transform: rotate(-0.75deg);
+      .card {
+        transform: rotate(-0.75deg);
+      }
     }
 
     &:nth-child(3) {
-      transform: rotate(-1deg);
+      .card {
+        transform: rotate(-1deg);
+      }
     }
 
     &:nth-child(4) {
-      transform: rotate(1.2deg);
+      .card {
+        transform: rotate(1.2deg);
+      }
     }
 
     &:nth-child(5) {
-      transform: rotate(-0.9deg);
+      .card {
+        transform: rotate(-0.9deg);
+      }
     }
 
     &:nth-child(6) {
-      transform: rotate(1.25deg);
+      .card {
+        transform: rotate(1.25deg);
+      }
     }
 
     &:nth-child(7) {
-      transform: rotate(-1.5deg);
+      .card {
+        transform: rotate(-1.5deg);
+      }
     }
+  }
+
+  .card {
+    width: $card-width;
+    height: $card-height;
+
+    position: absolute;
   } 
 }
