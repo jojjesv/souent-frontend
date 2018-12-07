@@ -8,6 +8,12 @@
   bottom: 0;
   background-color: rgba(20, 20, 20, 0.45);
   overflow: auto;
+  text-align: center;
+
+  $animation-dur: 500ms;
+  $animation-easing: cubic-bezier(0.23, 1, 0.32, 1);
+
+  animation: card-detail-container-appear $animation-dur $animation-easing;
 
   .base {
     width: 50%;
@@ -19,7 +25,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    text-align: left;
     min-height: #{50vw / $card-ratio};
+    animation: card-detail-base-appear $animation-dur $animation-easing;
   }
 
   .header-container {
@@ -47,5 +55,41 @@
     font-size: 16px;
     color: #616161;
     font-size: 150%;
+  }
+
+  .options {
+    ul {
+      display: flex;
+      flex-direction: row-reverse;
+
+      li {
+        display: inline-block;
+
+        .btn-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes card-detail-container-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes card-detail-base-appear {
+  from {
+    transform: translateX(-50%) translateY(10vh);
+  }
+
+  to {
+    transform: translateX(-50%);
   }
 }
