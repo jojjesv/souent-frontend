@@ -72,7 +72,10 @@ export default class BMCScreen extends React.Component<Props, State> {
             <div>
             </div>
           ) : state.cards.length ? (
-            <CardList data={state.cards} />
+            <CardList
+              data={state.cards}
+              onCardOpen={data => this.setState({ cardDetailData: data, cardDetailVisible: true })}
+            />
           ) : null
         }
         <CardDetailModal

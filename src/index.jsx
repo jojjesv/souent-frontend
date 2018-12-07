@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import CardHead from "./common/cardhead";
-import CardAllFList from './common/cardallflist';
+import CardAllFList from './common/card_list';
 import DefaultRouter from './DefaultRouter'
 import './styles.scss';
 import './forms.scss';
