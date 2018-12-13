@@ -10,7 +10,7 @@ export default class EnterprisesScreen extends React.Component {
     return (
       <div>
         <DrawAllFView />
-      </div>
-    )
-  }
+      </ div>
+        )
+      }
 }

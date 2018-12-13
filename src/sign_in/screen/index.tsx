@@ -28,9 +28,9 @@ export default class SignInScreen extends React.Component {
   }
 
   onSignIn = (googleuser) => {
-    console.log("googleuser init?");
     let id_token = googleuser.getAuthResponse().id_token;    
-    authWithAccessTokenService(id_token)
+    console.log("googleuser:", googleuser.getAuthResponse());
+    let result = authWithAccessTokenService(id_token)
   }
 
 }
