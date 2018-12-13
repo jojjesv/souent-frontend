@@ -37,6 +37,7 @@ export async function request(path: string, method: 'get'|'post'|'put'|'delete' 
   let result = await fetch(url, {
     method,
     headers: {
+      "Authorization": "Bearer 113034202958467266988",
       "Content-Type": "application/json"
     },
     body

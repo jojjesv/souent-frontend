@@ -4,9 +4,10 @@ import * as FormData from 'form-data'
 import { submitEnterprise } from './service';
 import classNames from 'classnames';
 import './styles.scss';
+import MemberListItem from './member_list_item';
 
 class State {
-  members: MemberData[] = [];
+  additionalMembers: MemberData[] = [];
   busySubmitting: boolean;
   logoSrc: string;
   formValid: boolean = false;
@@ -28,7 +29,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
   async submit() {
     let { state } = this;
 
-    if (state.busySubmitting) {
+    if (false && state.busySubmitting) {
       //  Already submitting
       return;
     }
@@ -52,8 +53,8 @@ export default class EnterpriseForm extends React.Component<any, State> {
 
   addMember() {
     this.setState(o => {
-      o.members.push(new MemberData());
-      console.log("Members: ", o.members);
+      o.additionalMembers.push(new MemberData());
+      console.log("Members: ", o.additionalMembers);
       return o;
     })
   }
@@ -61,7 +62,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
   removeMemberAt(index: number) {
     console.log("INDEX: ", index);
     this.setState(o => {
-      o.members.splice(index, 1);
+      o.additionalMembers.splice(index, 1);
       return o;
     })
   }
@@ -163,7 +164,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
             </fieldset>
             <fieldset id="" className="fieldset">
               <h2 className="title is-4 is-centered">
-                Members{state.members.length > 0 ? ` (${state.members.length + 1})` : ''}
+                Members{state.additionalMembers.length > 0 ? ` (${state.additionalMembers.length + 1})` : ''}
               </h2>
               <p className="subtitle is-6">
                 Members may edit this enterprise's business model canvas (BMC) info.
@@ -172,14 +173,20 @@ export default class EnterpriseForm extends React.Component<any, State> {
               <div>
                 <ul id="member-list">
                   {
-                    [{ email: 'jojjedeveloper@gmail.com' }].concat(state.members).map((member, i) => {
-                      
-                    })
+                    [{ email: 'jojjedeveloper@gmail.com' }].concat(state.additionalMembers).map((member, i) => (
+                      <MemberListItem
+                        index={i}
+                        isMe={i == 0}
+                        member={member}
+                        key={member.email}
+                        onChange={() => this.checkFormValidity()}
+                        onRemove={() => this.removeMemberAt(i - 1)} />
+                    ))
                   }
                 </ul>
                 <div>
                   {
-                    state.members.length < maxMemberCount - 1 ? (
+                    state.additionalMembers.length < maxMemberCount - 1 ? (
                       <button
                         id="add-member"
                         className="button"
@@ -200,7 +207,11 @@ export default class EnterpriseForm extends React.Component<any, State> {
           </div>
           <div style={{ textAlign: 'right' }}>
             <button
-              className={"button is-primary"}
+              className={classNames({
+                "button": true,
+                "is-primary": true,
+                "is-loading": state.busySubmitting
+              })}
               disabled={!state.formValid}
               onClick={e => {
                 e.preventDefault();

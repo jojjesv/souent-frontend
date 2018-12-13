@@ -5,12 +5,15 @@ import { request } from "../backend";
  */
 export async function submitEnterprise(formData: FormData) {
   let objPayload: any = {
-    members: []
+    additionalMembers: []
   };
 
+  formData.forEach((v, k) => console.log("[form data] " + k + " = " + v));
+
   let memberEmail: string;
-  for (let i = 0; !!(memberEmail = formData.get("member" + i) as string); i++) {
-    objPayload.members.push(memberEmail);
+  //  Skip the first member email (is me)
+  for (let i = 1; !!(memberEmail = formData.get("member" + i) as string); i++) {
+    objPayload.additionalMembers.push(memberEmail);
   }
 
   objPayload.name = formData.get("name") as string;
