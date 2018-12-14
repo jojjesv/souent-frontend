@@ -10,8 +10,6 @@
     margin: auto;
   }
 
-  $card-width: 240px;
-  $card-height: #{$card-width / $card-ratio};
   
   .card-container-single {
     height: $card-height;

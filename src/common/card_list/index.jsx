@@ -3,10 +3,8 @@ import Card from "../card";
 
 export default class CardList extends React.Component {
   render() {
-    let props = this.props;
-
     //  Array of card data
-    let cardsData = props.data;
+    let cardsData = this.props.data;
 
     let cards = [];
     for (let i = 0; i < cardsData.length; i++) {
@@ -14,14 +12,12 @@ export default class CardList extends React.Component {
         <div className="card-container-single">
           <Card
             key={i}
-            id={i}
-            ch={this.props.cHeight}
-            deg={"rotate(" + this.props.imgDeg + "deg)"}
-            cimg={`assets/images/${this.cardType(i)}.jpg`}
-            dt={this.props.dTop + i * this.props.dAdd}
-            htext={cardsData[i].title}
-            onOpen={() => props.onCardOpen(cardsData[i], i)}
-            ptext={cardsData[i].htmlPreviewContent} />
+            cardHeight={this.props.cardHeight}
+            topDistance={this.props.topDistance + 1 * this.props.addDistance}
+            img={`assets/images/${this.cardType(i)}.jpg`}
+            headerText={cardsData[i].title}
+            open={() => props.onCardOpen(cardsData[i], i)}
+            paragraphText={cardsData[i].htmlPreviewContent} />
         </div>
       ));
     }
@@ -32,18 +28,6 @@ export default class CardList extends React.Component {
     )
   }
   cardType(i) {
-    if (i % 4 == 0) {
-      return "spader";
     }
-    else if (i % 4 == 1) {
-      return "jater";
-    }
-    else if (i % 4 == 2) {
-      return "klover";
-    }
-    else if (i % 4 == 3) {
-      return "ruter";
-    }
-  }
 }
 
