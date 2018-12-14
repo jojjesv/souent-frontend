@@ -6,4 +6,9 @@ export default class {
   public title: string;
   public symbolImageUrl: string;
   public htmlContent: string;
+
+  /**
+   * Used for previewing the card.
+   */
+  public htmlPreviewContent: string;
 }

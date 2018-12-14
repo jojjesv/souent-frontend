@@ -2,25 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import CardHead from "./common/cardhead";
-import CardAllFList from "./common/cardallflist";
-import CardFList from "./common/cardflist";
+import CardAllFList from './common/card_list';
+import DefaultRouter from './DefaultRouter'
+import './styles.scss';
+import './forms.scss';
 
 function DrawFView(props){
     return <>
-        <CardHead cimg="../images/ruter.jpg" htext={"företag" + props.btId}/>
+        <CardHead cimg="assets/images/ruter.jpg" htext={"företag" + props.btId}/>
         <CardFList dTop={80} dAdd={5} cHeight={500}/>
     </>
 }
-function DrawAllFView(props){
+export function DrawAllFView(props){
     return <>
-        <CardHead cimg="../images/ruter.jpg" htext="Företag"/>
+        <CardHead cimg="assets/images/ruter.jpg" htext="Företag"/>
         <CardAllFList dTop={80} dAdd={5} cHeight={200} imgDeg={270}/>
     </>
 }
-ReactDOM.render(<DrawAllFView/>, document.getElementById("main"));
+
+ReactDOM.render(<DefaultRouter />, document.getElementById("main"));
 
 $(".content_b").on("click", function(){
     var btnId = $(this).attr("value");
     ReactDOM.render(<DrawFView btId={btnId}/>, document.getElementById("main"));
-
 });

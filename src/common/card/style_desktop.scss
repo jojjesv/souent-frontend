@@ -1,0 +1,76 @@
+@import "def";
+
+/* Card styles for desktop */
+@media (min-width: 768px) {
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-columns: 1fr;
+    width: 100%;
+    margin: auto;
+  }
+
+  $card-width: 240px;
+  $card-height: #{$card-width / $card-ratio};
+  
+  .card-container-single {
+    height: $card-height;
+    transition: all 250ms;
+
+    z-index: 1;
+
+    &:hover {
+      z-index: 2;
+      box-shadow: 0 0 24px rgba(20, 20, 20, 0.1);
+    }
+
+    &:nth-child(1) {
+      .card {
+        transform: rotate(1.5deg);
+      }
+    }
+
+    &:nth-child(2) {
+      .card {
+        transform: rotate(-0.75deg);
+      }
+    }
+
+    &:nth-child(3) {
+      .card {
+        transform: rotate(-1deg);
+      }
+    }
+
+    &:nth-child(4) {
+      .card {
+        transform: rotate(1.2deg);
+      }
+    }
+
+    &:nth-child(5) {
+      .card {
+        transform: rotate(-0.9deg);
+      }
+    }
+
+    &:nth-child(6) {
+      .card {
+        transform: rotate(1.25deg);
+      }
+    }
+
+    &:nth-child(7) {
+      .card {
+        transform: rotate(-1.5deg);
+      }
+    }
+  }
+
+  .card {
+    width: $card-width;
+    height: $card-height;
+
+    position: absolute;
+  } 
+}
