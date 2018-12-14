@@ -7,13 +7,14 @@
 //@ts-ignore
 //import fetch from 'whatwg-fetch';
 
+import * as Cookie from 'js-cookie';
 let baseUrl = `http://localhost:8004/api`;
 
 /**
  * Performs a standard backend request.
  * Expects the result as JSON!
  */
-export async function request(path: string, method: 'get'|'post'|'put'|'delete' = 'get', body: any = null, query: string = null) {
+export async function request(path: string, method: 'get' | 'post' | 'put' | 'delete' = 'get', body: any = null, query: string = null) {
   path = path || "";
   query = query || "";
 
@@ -28,15 +29,20 @@ export async function request(path: string, method: 'get'|'post'|'put'|'delete' 
   if (body && typeof body == "object") {
     body = JSON.stringify(body);
   }
-  
+
   if (method == "get") {
     body = undefined;
   }
+
+  let authToken = Cookie.get("auth_token");
 
   let url = `${baseUrl}${path}${query}`;
   let result = await fetch(url, {
     method,
     headers: {
+      ...(authToken ? {
+        "Authorization": `Bearer ${authToken}`,
+      } : {}),
       "Content-Type": "application/json"
     },
     body

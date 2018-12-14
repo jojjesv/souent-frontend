@@ -2,11 +2,19 @@ import * as React from 'react';
 
 import MemberData from "../models/MemberData";
 
+interface Props {
+  onRemove: () => void;
+  member: MemberData;
+  isMe?: boolean;
+  onChange?: any;
+  index: number;
+}
+
 /**
  * Item of a list of to-be members.
  * @author Johan Svensson
  */
-export default function (props: { member: MemberData, isMe?: boolean, onChange?: any, index: number }) {
+export default function (props: Props) {
   let { member, isMe, onChange, index } = props;
 
   return (
@@ -19,12 +27,15 @@ export default function (props: { member: MemberData, isMe?: boolean, onChange?:
           className="input"
           ref={e => e && (e.value = `${member.email || ""}${isMe ? " (me)" : ""}`)}
           type="email"
+          key={`member-email-input-${index}`}
           required={true}
           disabled={isMe}
           name={`member${index}`}
           onChange={e => {
             member.email = e.currentTarget.value.trim();
-            this.checkFormValidity();
+            if (typeof props.onChange == "function") {
+              props.onChange();
+            }
           }} />
       </div>
       <div>
@@ -34,7 +45,7 @@ export default function (props: { member: MemberData, isMe?: boolean, onChange?:
               className="remove-member"
               onClick={e => {
                 e.preventDefault();
-                this.removeMemberAt(index - 1);
+                props.onRemove();
               }}>
               <span className="fas fa-minus-circle"></span>
             </button>
