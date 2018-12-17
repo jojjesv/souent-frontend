@@ -6,5 +6,7 @@ import BMCCard from "./BMCCard";
  */
 export default class {
   id: string;
+  name: string;
+  businessIdea: string;
   cards: BMCCard[];
 }

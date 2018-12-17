@@ -16,7 +16,7 @@ function DrawFView(props){
 export function DrawAllFView(props){
     return <>
         <CardHead cimg="assets/images/ruter.jpg" htext="Företag"/>
-        <CardAllFList dTop={80} dAdd={5} cHeight={200} imgDeg={270}/>
+        <CardAllFList data={props.data} dTop={80} dAdd={5} />
     </>
 }
 

@@ -29,8 +29,16 @@ export default class SignInScreen extends React.Component {
 
   onSignIn = (googleuser) => {
     let id_token = googleuser.getAuthResponse().id_token;    
-    console.log("googleuser:", googleuser.getAuthResponse());
-    let result = authWithAccessTokenService(id_token)
+    authWithAccessTokenService(id_token).then(() => this.onObtainedAuthToken())
   }
 
+  onObtainedAuthToken() {
+    this.continue();
+  }
+
+  /**
+   * Continues to some other screen after signing up.
+   */
+  continue() {
+  }
 }
