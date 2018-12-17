@@ -19,7 +19,9 @@ export async function submitEnterprise(formData: FormData) {
   objPayload.name = formData.get("name") as string;
   objPayload.businessIdea = formData.get("business-idea") as string;
 
-  debugger;
-
   let response = await request('/enterprises', 'post', objPayload);
+
+  return {
+    id: response.enterprise.id
+  }
 }
