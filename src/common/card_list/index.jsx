@@ -4,8 +4,10 @@ import classNames from 'classnames';
 
 export default class CardList extends React.Component {
   render() {
+    let props = this.props;
+    
     //  Array of card data
-    let cardsData = this.props.data;
+    let cardsData = props.data;
 
     let cards = [];
     for (let i = 0; i < cardsData.length; i++) {
@@ -13,8 +15,8 @@ export default class CardList extends React.Component {
         <div className="card-container-single">
           <Card
             key={i}
-            cardHeight={this.props.cardHeight}
-            topDistance={this.props.topDistance + 1 * this.props.addDistance}
+            cardHeight={props.cardHeight}
+            topDistance={props.topDistance + 1 * props.addDistance}
             img={`assets/images/${this.cardType(i)}.jpg`}
             headerText={cardsData[i].title}
             open={() => props.onCardOpen(cardsData[i], i)}
