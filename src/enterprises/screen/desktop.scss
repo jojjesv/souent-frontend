@@ -1,0 +1,32 @@
+/* Desktop media query */
+@media (min-width: 768px) {
+  .card-list.enterprise-list {
+    grid-template-columns: repeat(3, 1fr);
+
+    .card {
+      height: 220px;
+    }
+
+    .card-container-single {
+      height: 320px;
+
+      &:nth-child(3n + 1) {
+        .card {
+          transform: rotate(-2.5deg) translateY(8px);
+        }
+      }
+
+      &:nth-child(3n + 2) {
+        .card {
+          transform: none;
+        }
+      }
+
+      &:nth-child(3n + 3) {
+        .card {
+          transform: rotate(2.5deg) translateY(8px);
+        }
+      }
+    }
+  }
+}

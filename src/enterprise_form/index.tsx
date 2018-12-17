@@ -5,10 +5,15 @@ import { submitEnterprise } from './service';
 import classNames from 'classnames';
 import './styles.scss';
 import MemberListItem from './member_list_item';
+import {
+  Redirect
+} from 'react-router-dom';
 
 class State {
   additionalMembers: MemberData[] = [];
   busySubmitting: boolean;
+  submitted: boolean = false;
+  createdEnterpriseId: boolean = false;
   logoSrc: string;
   formValid: boolean = false;
 }
@@ -47,6 +52,8 @@ export default class EnterpriseForm extends React.Component<any, State> {
     let result = await submitEnterprise(formData);
 
     this.setState({
+      submitted: true,
+      createdEnterpriseId: result.id,
       busySubmitting: false
     })
   }
@@ -221,6 +228,12 @@ export default class EnterpriseForm extends React.Component<any, State> {
             </button>
           </div>
         </form>
+        {
+          state.submitted ? (
+            //  Redirect to BMC site
+            <Redirect to={`/bmc/${state.createdEnterpriseId}`} />
+          ) : null
+        }
       </div>
     )
   }
