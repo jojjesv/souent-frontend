@@ -7,7 +7,7 @@ export default function Card(props) {
 		<img src={props.img} className="symbol top-left"></img>
 		<h1 className="header" >{props.headerText}</h1>
 		<p className="preview-content" dangerouslySetInnerHTML={{ __html: props.paragraphText }}></p>
-		<button className="open" value={props.id} onClick={props.open}>Open</button>
+		<button className="open" value={props.id} onClick={props.open}>Read more</button>
 		<img src={props.img} className="symbol bottom-right" ></img>
 	</div>
 }

@@ -1,5 +1,5 @@
 .card {
-    position: sticky;
+    position: absolute;
     background-color: white;
     border: 2px solid black;
     border-radius: 15px;
@@ -11,30 +11,26 @@
     .open {
         grid-column: 1 / 3;
         grid-row: 3 / 4;
-        background-color: rgb(100, 100, 100);
+        background-color: rgb(255, 255, 255);
         padding: 2px;
         margin: 5px;
-        color: black;
-        font-size: 30px;
+        color: rgb(0, 183, 255);
+        font-size: 17px;
         border: none;
-        border-radius: 5px;
     }
 
     .symbol {
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
         &.top-left {
             grid-column: 1 / 2;
             grid-row: 1 / 2;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
         }
     
         &.bottom-right {
             grid-column: 3 / 4;
             grid-row: 3 / 4;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
         }
     }
 

@@ -37,6 +37,21 @@ export async function fetchBmc(publicEnterpriseId: string): Promise<BMCCard[]> {
   }, {
     htmlContent: `<p>Hello</p>`,
     htmlPreviewContent: `<p>Hello</p>`,
+    title: 'Channels',
+    symbolImageUrl: 'test.jpg'
+  }, {
+    htmlContent: `<p>Hello</p>`,
+    htmlPreviewContent: `<p>Hello</p>`,
+    title: 'Channels',
+    symbolImageUrl: 'test.jpg'
+  }, {
+    htmlContent: `<p>Hello</p>`,
+    htmlPreviewContent: `<p>Hello</p>`,
+    title: 'Channels',
+    symbolImageUrl: 'test.jpg'
+  }, {
+    htmlContent: `<p>Hello</p>`,
+    htmlPreviewContent: `<p>Hello</p>`,
     title: 'Customer Segments',
     symbolImageUrl: 'test.jpg'
   }]
