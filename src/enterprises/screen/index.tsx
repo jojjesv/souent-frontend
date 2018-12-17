@@ -3,6 +3,7 @@ import Enterprise from '../../models/Enterprise';
 import { fetchEnterprises } from './service';
 import TaskIndicator from '../../common/task_indicator';
 import CardList from '../../common/card_list'
+import './desktop.scss'
 
 class State {
   fetchingEnterprises = false;
@@ -56,8 +57,10 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
           ) : (
               <CardList
                 className="enterprise-list"
+                openLinkHref={d => `/bmc/${d.id}`}
                 data={state.enterprises.map(enterprise => {
                   return {
+                    id: enterprise.id,
                     title: enterprise.name,
                     htmlPreviewContent: enterprise.businessIdea
                   }

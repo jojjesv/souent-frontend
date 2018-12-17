@@ -19,6 +19,7 @@ export default class CardList extends React.Component {
             topDistance={props.topDistance + 1 * props.addDistance}
             img={`assets/images/${this.cardType(i)}.jpg`}
             headerText={cardsData[i].title}
+            openLinkHref={props.openLinkHref ? props.openLinkHref(cardsData[i]) : null}
             open={() => props.onCardOpen(cardsData[i], i)}
             paragraphText={cardsData[i].htmlPreviewContent} />
         </div>
