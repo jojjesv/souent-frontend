@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../card";
+import classNames from 'classnames';
 
 export default class CardList extends React.Component {
   render() {
@@ -26,7 +27,7 @@ export default class CardList extends React.Component {
       ));
     }
     return (
-      <div className="card-list">
+      <div className={classNames(["card-list", props.className])}>
         {cards}
       </div>
     )
