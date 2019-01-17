@@ -58,12 +58,12 @@ export default class CardDetailModal extends React.Component<Props, State> {
             <ul>
               <li>
                 <button className="reset" onClick={() => this.dimiss()}>
-                  <img className="btn-icon" alt="Close" src={"../assets/images/ic_close.png"} />
+                  <img className="btn-icon" alt="Close" src={"../assets/images/close-icon.png"} />
                 </button>
               </li>
               <li>
                 <button className="reset">
-                  <img className="btn-icon" alt="Edit" src={"../assets/images/ic_edit.png"} />
+                  <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
                 </button>
               </li>
             </ul>
