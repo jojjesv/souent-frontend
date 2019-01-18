@@ -5,10 +5,12 @@ import TaskIndicator from '../../common/task_indicator';
 import CardList from '../../common/card_list'
 import './desktop.scss'
 import { Link } from 'react-router-dom';
+import SideMenu from '../../common/side_menu';
 
 class State {
   fetchingEnterprises = false;
   enterprises: Enterprise[] = [];
+  sideMenuOpen = false;
 }
 
 interface Props {
@@ -24,6 +26,12 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
 
   componentDidMount() {
     this.fetchEnterprises();
+
+    setTimeout(() => {
+      this.setState({
+        sideMenuOpen: true
+      })
+    }, 2500);
   }
 
   /**
@@ -56,6 +64,11 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
           <Link to="/enterprise/new">
             <span className="fas fa-plus"></span>
           </Link>
+          <a role="button" onClick={() => this.setState({
+            sideMenuOpen: true
+          })}>
+            <span className="fas fa-bars"></span>
+          </a>
         </header>
         {
           state.fetchingEnterprises ? (
@@ -73,6 +86,12 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
                 })} />
             )
         }
+
+        <SideMenu
+          open={state.sideMenuOpen}
+          onRequestClose={() => this.setState({
+            sideMenuOpen: false
+          })} />
       </div>
     )
   }
