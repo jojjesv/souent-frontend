@@ -5,9 +5,11 @@ let mountedButtons: GoogleSignInButton[] = []
 
 function setupAllMountedButtons() {
   console.log("setupAllMountedButtons");
+  gapiIsSetup = true;
   mountedButtons.forEach(btn => btn.setupGoogleButton());
 }
 
+let gapiIsSetup = false;
 (window as any).setupAllMountedButtons = setupAllMountedButtons;
 
 document.write('<script src="https://apis.google.com/js/platform.js?onload=setupAllMountedButtons" async defer></script>')
@@ -22,11 +24,15 @@ class State {
  */
 export default class GoogleSignInButton extends React.Component<any, State> {
   state = new State();
-  
+
   buttonId = 'gbtn-' + Date.now();
 
   componentDidMount() {
     mountedButtons.push(this);
+    if (gapiIsSetup) {
+      //  OK now to setup
+      this.setupGoogleButton();
+    }
   }
 
   componentWillUnmount() {
