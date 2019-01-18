@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { fetchAuthToken } from './service';
 
 let mountedButtons: GoogleSignInButton[] = []
 
 function setupAllMountedButtons() {
-  console.log("setupAllMountedButtons")
+  console.log("setupAllMountedButtons");
   mountedButtons.forEach(btn => btn.setupGoogleButton());
 }
 
@@ -11,11 +12,17 @@ function setupAllMountedButtons() {
 
 document.write('<script src="https://apis.google.com/js/platform.js?onload=setupAllMountedButtons" async defer></script>')
 
+class State {
+  fetchingAuthToken = false;
+}
+
 /**
  * Default Google sign-in button.
  * @author Johan Svensson
  */
-export default class GoogleSignInButton extends React.PureComponent {
+export default class GoogleSignInButton extends React.Component<any, State> {
+  state = new State();
+  
   buttonId = 'gbtn-' + Date.now();
 
   componentDidMount() {
@@ -28,6 +35,29 @@ export default class GoogleSignInButton extends React.PureComponent {
     } catch (e) { }
   }
 
+  onSignedIn(gUser) {
+    let accessToken = gUser.getAuthResponse().id_token;
+    this.fetchAuthToken(accessToken);
+  }
+
+  async fetchAuthToken(accessToken: string) {
+    let { state } = this;
+    if (state.fetchingAuthToken) {
+      return;
+    }
+
+    this.setState({
+      fetchingAuthToken: true
+    });
+
+    let token = await fetchAuthToken(accessToken);
+    console.log("[GoogleSignInButton] retrieved auth token:", token);
+
+    this.setState({
+      fetchingAuthToken: false
+    });
+  }
+
   setupGoogleButton() {
     //@ts-ignore
     gapi.signin2.render(this.buttonId, {
@@ -36,9 +66,7 @@ export default class GoogleSignInButton extends React.PureComponent {
       'height': 50,
       'longtitle': true,
       'theme': 'dark',
-      'onsuccess': () => {
-        console.log("BTN on success");
-      },
+      'onsuccess': this.onSignedIn.bind(this),
       'onfailure': () => {
         console.log("BTN on failure");
       }
