@@ -132,6 +132,10 @@ export default class EnterpriseForm extends React.Component<any, State> {
           </Link>
         </header>
         <form id="enterprise-add-form"
+          onSubmit={e => {
+            e.preventDefault();
+            this.submit();
+          }}
           ref={e => this.formRef = e}>
           <div className="section fieldsets">
             <fieldset className="fieldset">
@@ -236,11 +240,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
                 "is-loading": state.busySubmitting
               })}
               ref={e => this.submitRef = e}
-              disabled={!this.formValid}
-              onClick={e => {
-                e.preventDefault();
-                this.submit();
-              }}>
+              disabled={!this.formValid}>
               Create enterprise
             </button>
           </div>
