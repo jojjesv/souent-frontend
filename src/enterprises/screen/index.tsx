@@ -26,12 +26,6 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
 
   componentDidMount() {
     this.fetchEnterprises();
-
-    setTimeout(() => {
-      this.setState({
-        sideMenuOpen: true
-      })
-    }, 2500);
   }
 
   /**
