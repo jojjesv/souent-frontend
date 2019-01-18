@@ -17,7 +17,7 @@ export default class CardList extends React.Component {
             key={i}
             cardHeight={props.cardHeight}
             topDistance={props.topDistance + 1 * props.addDistance}
-            img={`assets/images/${this.cardType(i)}.jpg`}
+            img={`assets/images/${i}.png`}
             headerText={cardsData[i].title}
             openLinkHref={props.openLinkHref ? props.openLinkHref(cardsData[i]) : null}
             open={() => props.onCardOpen(cardsData[i], i)}
@@ -31,7 +31,5 @@ export default class CardList extends React.Component {
       </div>
     )
   }
-  cardType(i) {
-    }
 }
 
