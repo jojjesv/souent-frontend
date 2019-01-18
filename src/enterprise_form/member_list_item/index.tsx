@@ -8,6 +8,7 @@ interface Props {
   isMe?: boolean;
   onChange?: any;
   index: number;
+  name?: string;
 }
 
 /**
@@ -30,7 +31,7 @@ export default function (props: Props) {
           key={`member-email-input-${index}`}
           required={true}
           disabled={isMe}
-          name={`member${index}`}
+          name={props.name}
           onChange={e => {
             member.email = e.currentTarget.value.trim();
             if (typeof props.onChange == "function") {

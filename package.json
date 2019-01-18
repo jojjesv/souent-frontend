@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "watch": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,8 +20,8 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@types/classnames": "^2.2.7",
     "@types/form-data": "^2.2.1",
-    "@types/gapi": "0.0.36",
     "@types/js-cookie": "^2.2.0",
     "@types/react": "^16.7.7",
     "@types/react-router": "^4.4.1",
