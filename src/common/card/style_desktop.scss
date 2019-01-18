@@ -65,6 +65,24 @@
         transform: rotate(-1.5deg);
       }
     }
+
+    &:nth-child(8) {
+      .card {
+        transform: rotate(2deg);
+      }
+    }
+    
+    &:nth-child(9) {
+      .card {
+        transform: rotate(-2deg);
+      }
+    }
+    
+    &:nth-child(10) {
+      .card {
+        transform: rotate(1.9deg);
+      }
+    }
   }
 
   .card {

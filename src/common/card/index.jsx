@@ -14,7 +14,7 @@ export default function Card(props) {
 			props.openLinkHref ? (
 				<Link className="open" to={props.openLinkHref}>Read more</Link>
 			) : (
-					<button className="open" value={props.id} onClick={props.open}>Open</button>
+					<button className="open" value={props.id} onClick={props.open}>Read more</button>
 				)
 		}
 		<img src={props.img} className="symbol bottom-right" ></img>
