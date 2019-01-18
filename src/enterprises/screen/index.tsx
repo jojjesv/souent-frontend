@@ -4,6 +4,7 @@ import { fetchEnterprises } from './service';
 import TaskIndicator from '../../common/task_indicator';
 import CardList from '../../common/card_list'
 import './desktop.scss'
+import { Link } from 'react-router-dom';
 
 class State {
   fetchingEnterprises = false;
@@ -51,6 +52,11 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
 
     return (
       <div>
+        <header className="enterprises-header fixed">
+          <Link to="/enterprise/new">
+            <span className="fas fa-plus"></span>
+          </Link>
+        </header>
         {
           state.fetchingEnterprises ? (
             <TaskIndicator />

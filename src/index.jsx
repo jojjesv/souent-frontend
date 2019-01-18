@@ -5,6 +5,7 @@ import CardHead from "./common/cardhead";
 import CardList from './common/card_list';
 import DefaultRouter from './DefaultRouter'
 import './styles.scss';
+import './fixed_header.scss';
 import './forms.scss';
 
 export function DrawAllFView(props){

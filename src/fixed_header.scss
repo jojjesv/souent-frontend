@@ -1,0 +1,10 @@
+header.fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 18px 24px;
+}

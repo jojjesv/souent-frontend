@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import './styles.scss';
 import MemberListItem from './member_list_item';
 import {
-  Redirect
+  Redirect, Link
 } from 'react-router-dom';
 
 class State {
@@ -15,7 +15,6 @@ class State {
   submitted: boolean = false;
   createdEnterpriseId: boolean = false;
   logoSrc: string;
-  formValid: boolean = false;
 }
 
 let maxMemberCount = 5;
@@ -27,6 +26,9 @@ let maxMemberCount = 5;
 export default class EnterpriseForm extends React.Component<any, State> {
   state = new State();
   formRef: HTMLFormElement;
+  submitRef: HTMLButtonElement;
+
+  formValid = false
 
   /**
    * Submits the form, uses the service to request to create a new enterprise.
@@ -102,13 +104,19 @@ export default class EnterpriseForm extends React.Component<any, State> {
     let formElement = this.formRef;
 
     let valid = formElement.checkValidity();
-    console.log("checkFormValidity", valid)
 
-    let { state } = this;
-    if (state.formValid != valid) {
-      this.setState({
-        formValid: valid
-      })
+    if (this.formValid != valid) {
+      let { submitRef } = this;
+
+      //  Difficulties when updating state here
+
+      if (!valid) {
+        submitRef.setAttribute('disabled', 'true');
+      } else {
+        submitRef.removeAttribute('disabled');
+      }
+
+      this.formValid = valid;
     }
   }
 
@@ -117,6 +125,12 @@ export default class EnterpriseForm extends React.Component<any, State> {
 
     return (
       <div>
+        <header className="fixed">
+          <div></div>
+          <Link to="../">
+            <span className="fas fa-chevron-left"></span>
+          </Link>
+        </header>
         <form id="enterprise-add-form"
           ref={e => this.formRef = e}>
           <div className="section fieldsets">
@@ -185,12 +199,14 @@ export default class EnterpriseForm extends React.Component<any, State> {
                         index={i}
                         isMe={i == 0}
                         member={member}
+                        name={`member-${i - 1}`}
                         key={member.email}
                         onChange={() => this.checkFormValidity()}
                         onRemove={() => this.removeMemberAt(i - 1)} />
                     ))
                   }
                 </ul>
+                <input type="hidden" name="additional-member-count" value={state.additionalMembers.length} />
                 <div>
                   {
                     state.additionalMembers.length < maxMemberCount - 1 ? (
@@ -219,7 +235,8 @@ export default class EnterpriseForm extends React.Component<any, State> {
                 "is-primary": true,
                 "is-loading": state.busySubmitting
               })}
-              disabled={!state.formValid}
+              ref={e => this.submitRef = e}
+              disabled={!this.formValid}
               onClick={e => {
                 e.preventDefault();
                 this.submit();
