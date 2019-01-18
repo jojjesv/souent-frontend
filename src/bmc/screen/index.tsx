@@ -4,6 +4,7 @@ import BMCCard from '../../models/BMCCard';
 import { RouteComponentProps } from 'react-router';
 import CardList from '../../common/card_list/index.jsx'
 import CardDetailModal from '../card_detail';
+import { Link } from 'react-router-dom';
 
 class State {
   busyFetchingBmc = false;
@@ -67,6 +68,11 @@ export default class BMCScreen extends React.Component<Props, State> {
 
     return (
       <div>
+        <header className="enterprises-header fixed reverse">
+          <Link to="../">
+            <span className="fas fa-chevron-left"></span>
+          </Link>
+        </header>
         {
           state.busyFetchingBmc ? (
             <div>

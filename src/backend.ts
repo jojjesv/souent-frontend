@@ -26,7 +26,9 @@ export async function request(path: string, method: 'get' | 'post' | 'put' | 'de
     query = `?${query}`;
   }
 
-  if (body && typeof body == "object") {
+  let isFormData = body instanceof FormData;
+
+  if (body && !isFormData && typeof body == "object") {
     body = JSON.stringify(body);
   }
 
@@ -43,7 +45,9 @@ export async function request(path: string, method: 'get' | 'post' | 'put' | 'de
       ...(authToken ? {
         "Authorization": `Bearer ${authToken}`,
       } : {}),
-      "Content-Type": "application/json"
+      ...(!isFormData ? {
+        "Content-Type": "application/json",
+      } : {}),
     },
     body
   });
