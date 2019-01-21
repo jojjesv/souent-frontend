@@ -5,10 +5,19 @@ import { RouteComponentProps } from 'react-router';
 import CardList from '../../common/card_list/index.jsx'
 import CardDetailModal from '../card_detail';
 import { Link } from 'react-router-dom';
+import TaskIndicator from '../../common/task_indicator';
+import Enterprise from '../../models/Enterprise';
+import EnterpriseHeader from '../desktop/enterprise_header';
+import EnterpriseInfoHeader from './EnterpriseInfoHeader';
+import './styles.scss';
 
 class State {
-  busyFetchingBmc = false;
-  cards: BMCCard[] = [];
+  //  Is initially fetching
+  busyFetching = true;
+  bmc: BMCCard[] = [];
+
+  //  Basic enterprise info
+  enterprise: Enterprise;
   cardDetailVisible: boolean;
 
   //  Current card data for card detail view
@@ -42,24 +51,20 @@ export default class BMCScreen extends React.Component<Props, State> {
   }
 
   /**
-   * Fetches the BMC cards to show.
+   * Fetches basic info and the BMC cards to show.
    */
   async fetch(enterpriseId: string) {
     let { state } = this;
-    if (state.busyFetchingBmc) {
-      //  Already fetching
-      return;
-    }
 
     this.setState({
-      busyFetchingBmc: true
+      busyFetching: true
     });
 
     let result = await fetchBMCCards(enterpriseId);
 
     this.setState({
-      cards: result,
-      busyFetchingBmc: false
+      ...result,
+      busyFetching: false
     });
   }
 
@@ -74,15 +79,20 @@ export default class BMCScreen extends React.Component<Props, State> {
           </Link>
         </header>
         {
-          state.busyFetchingBmc ? (
+          state.busyFetching ? (
             <div>
+              <TaskIndicator fullscreen />
             </div>
-          ) : state.cards.length ? (
-            <CardList
-              data={state.cards}
-              onCardOpen={data => this.setState({ cardDetailData: data, cardDetailVisible: true })}
-            />
-          ) : null
+          ) : (
+              <div>
+                <EnterpriseInfoHeader enterprise={state.enterprise} />
+                <CardList
+                  data={state.bmc}
+                  className="bmc"
+                  onCardOpen={data => this.setState({ cardDetailData: data, cardDetailVisible: true })}
+                />
+              </div>
+            )
         }
         <CardDetailModal
           visible={state.cardDetailVisible}

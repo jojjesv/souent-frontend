@@ -66,7 +66,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
         </header>
         {
           state.fetchingEnterprises ? (
-            <TaskIndicator />
+            <TaskIndicator fullscreen />
           ) : (
               <CardList
                 className="enterprise-list"
@@ -78,6 +78,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
                   console.log("enterprise: ",enterprise)
                   return {
                     id: enterprise.id,
+                    logoUrl: enterprise.logoUrl,
                     title: enterprise.name,
                     htmlPreviewContent: enterprise.businessIdea
                   }

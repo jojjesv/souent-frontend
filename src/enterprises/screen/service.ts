@@ -15,7 +15,8 @@ export async function fetchEnterprises(): Promise<Enterprise[]> {
     let enterprise: Enterprise = {
       id: data.id,
       name: data.name,
-      businessIdea: data.description,
+      businessIdea: data.businessIdea,
+      logoUrl: data.logoUrl,
       cards: null
     };
 
