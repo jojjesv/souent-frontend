@@ -12,6 +12,7 @@ interface Props {
 class State {
   fullyVisible: boolean;
   dismissing: boolean;
+  editMode: boolean;
 }
 
 /**
@@ -39,6 +40,12 @@ export default class CardDetailModal extends React.Component<Props, State> {
     }, animDuration);
   }
 
+  toggleEditMode(){
+    this.setState({
+      editMode:!this.state.editMode
+    })
+  }
+
   render() {
     let { props, state } = this;
 
@@ -62,7 +69,7 @@ export default class CardDetailModal extends React.Component<Props, State> {
                 </button>
               </li>
               <li>
-                <button className="reset">
+                <button className="reset" onClick={() => this.toggleEditMode()}>
                   <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
                 </button>
               </li>
@@ -72,9 +79,9 @@ export default class CardDetailModal extends React.Component<Props, State> {
             <img alt="symbol" className="symbol" />
             <h1 className="header">{data.title}</h1>
           </div>
-          <div className="html-content" dangerouslySetInnerHTML={{ __html: data.htmlContent }}>
+          <textarea disabled={!state.editMode} id="text" className="html-content" dangerouslySetInnerHTML={{ __html: data.htmlContent }}>
 
-          </div>
+          </textarea>
         </div>
       </div>
     )
