@@ -1,5 +1,6 @@
 import BMCCard from "../models/BMCCard";
 import { request } from "../backend";
+import Enterprise from "../models/Enterprise";
 
 /**
  * A service for fetching and updating BMC card data.
@@ -11,14 +12,14 @@ import { request } from "../backend";
  * Fetches all BMC cards for a specific enterprise.
  * @param enterpriseId The public ID of the enterprise whose cards to fetch.
  */
-export async function fetchBMCCards(enterpriseId: string): Promise<BMCCard[]> {
+export async function fetchBMCCards(enterpriseId: string): Promise<{ cards: BMCCard[], enterprise: Enterprise }> {
   let result = await request(`/enterprise/${enterpriseId}/bmc`);
 
   if ("error" in result) {
     throw result.error;
   }
 
-  return result.bmc;
+  return result;
 }
 
 /**

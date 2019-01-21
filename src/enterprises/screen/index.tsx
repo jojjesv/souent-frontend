@@ -66,7 +66,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
         </header>
         {
           state.fetchingEnterprises ? (
-            <TaskIndicator />
+            <TaskIndicator fullscreen />
           ) : (
               <CardList
                 className="enterprise-list"

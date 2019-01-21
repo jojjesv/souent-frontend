@@ -4,4 +4,11 @@ $size: 24px;
   width: $size;
   height: $size;
   background-size: cover;
+
+  &.fullscreen {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
