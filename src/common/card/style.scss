@@ -1,9 +1,13 @@
 .card {
-  position: absolute;
   background-color: white;
   border: 1px solid #c0c0c0;
   border-bottom-color: #b5b5b5;
   border-radius: 15px;
+  height: 240px;
+  width: 100%;
+  max-width: 320px;
+  margin: 12px auto;
+
   > * {
     position: absolute;
   }
