@@ -16,6 +16,10 @@ export default class EnterpriseInfoHeader extends React.PureComponent<Props> {
 
     return (
       <header className="enterprise-info">
+        <div className="logo" style={{
+          backgroundImage: `url(${enterprise.logoUrl})`
+        }}>
+        </div>
         <h1 className="title">{enterprise.name}</h1>
       </header>
     )
