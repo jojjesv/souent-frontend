@@ -21,8 +21,12 @@ export default class SideMenu extends React.Component<Props> {
         "side-menu-container": true,
         "open": props.open
       })}
-      onClick={props.onRequestClose}>
+        onClick={props.onRequestClose}>
         <div className="side-menu" onClick={e => e.stopPropagation()}>
+          <h1 className="app-title">
+            Souent
+            <span className="slogan">Social entrepreneour hub</span>
+          </h1>
           <GoogleSignInButton />
         </div>
       </div>
