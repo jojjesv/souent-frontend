@@ -7,6 +7,7 @@ header.fixed {
   flex-direction: row-reverse;
   justify-content: space-between;
   padding: 18px 24px;
+  z-index: 999;
 
   &.reverse {
     flex-direction: row;
