@@ -70,8 +70,12 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
           ) : (
               <CardList
                 className="enterprise-list"
-                openLinkHref={d => `/bmc/${d.id}`}
+                openLinkHref={d => {
+                  console.log("d: ", d)
+                  return `/bmc/${d.id}`
+                }}
                 data={state.enterprises.map(enterprise => {
+                  console.log("enterprise: ",enterprise)
                   return {
                     id: enterprise.id,
                     title: enterprise.name,

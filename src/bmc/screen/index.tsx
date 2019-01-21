@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fetchBmc } from './service';
+import { fetchBMCCards } from '../service';
 import BMCCard from '../../models/BMCCard';
 import { RouteComponentProps } from 'react-router';
 import CardList from '../../common/card_list/index.jsx'
@@ -55,7 +55,7 @@ export default class BMCScreen extends React.Component<Props, State> {
       busyFetchingBmc: true
     });
 
-    let result = await fetchBmc(enterpriseId);
+    let result = await fetchBMCCards(enterpriseId);
 
     this.setState({
       cards: result,

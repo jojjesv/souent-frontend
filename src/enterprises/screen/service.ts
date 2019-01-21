@@ -13,7 +13,7 @@ export async function fetchEnterprises(): Promise<Enterprise[]> {
 
   return (result.enterprises as any[]).map(data => {
     let enterprise: Enterprise = {
-      id: data.public_id,
+      id: data.id,
       name: data.name,
       businessIdea: data.description,
       cards: null

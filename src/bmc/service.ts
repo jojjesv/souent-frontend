@@ -11,8 +11,8 @@ import { request } from "../backend";
  * Fetches all BMC cards for a specific enterprise.
  * @param enterpriseId The public ID of the enterprise whose cards to fetch.
  */
-export async function fetchBMCCards(enterpriseId: string): Promise<BMCCard> {
-  let result = await request(`/bmc/${enterpriseId}`);
+export async function fetchBMCCards(enterpriseId: string): Promise<BMCCard[]> {
+  let result = await request(`/enterprise/${enterpriseId}/bmc`);
 
   if ("error" in result) {
     throw result.error;
