@@ -14,7 +14,7 @@ import './styles.scss';
 class State {
   //  Is initially fetching
   busyFetching = true;
-  cards: BMCCard[] = [];
+  bmc: BMCCard[] = [];
 
   //  Basic enterprise info
   enterprise: Enterprise;
@@ -87,7 +87,8 @@ export default class BMCScreen extends React.Component<Props, State> {
               <div>
                 <EnterpriseInfoHeader enterprise={state.enterprise} />
                 <CardList
-                  data={state.cards}
+                  data={state.bmc}
+                  className="bmc"
                   onCardOpen={data => this.setState({ cardDetailData: data, cardDetailVisible: true })}
                 />
               </div>

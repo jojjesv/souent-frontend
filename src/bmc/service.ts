@@ -12,7 +12,7 @@ import Enterprise from "../models/Enterprise";
  * Fetches all BMC cards for a specific enterprise.
  * @param enterpriseId The public ID of the enterprise whose cards to fetch.
  */
-export async function fetchBMCCards(enterpriseId: string): Promise<{ cards: BMCCard[], enterprise: Enterprise }> {
+export async function fetchBMCCards(enterpriseId: string): Promise<{ bmc: BMCCard[], enterprise: Enterprise }> {
   let result = await request(`/enterprise/${enterpriseId}/bmc`);
 
   if ("error" in result) {
