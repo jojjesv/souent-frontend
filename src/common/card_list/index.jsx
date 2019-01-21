@@ -16,6 +16,7 @@ export default class CardList extends React.Component {
           <Card
             key={i}
             cardHeight={props.cardHeight}
+            customLogoUrl={cardsData[i].logoUrl}
             topDistance={props.topDistance + 1 * props.addDistance}
             img={`/assets/images/${i + 1}.png`}
             headerText={cardsData[i].title}

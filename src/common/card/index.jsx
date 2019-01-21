@@ -6,8 +6,10 @@ import "./style.scss";
 import "./style_desktop.scss";
 
 export default function Card(props) {
+  let { customLogoUrl } = props;
+
 	return <div className="card" style={{ top: props.topDistance, height: props.cardHeight }}>
-		<img src={props.img} className="symbol top-left"></img>
+		<img src={customLogoUrl || props.img} className="symbol top-left"></img>
 		<h1 className="header" >{props.headerText}</h1>
 		<p className="preview-content"
 			ref={e => {

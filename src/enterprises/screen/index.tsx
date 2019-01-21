@@ -78,6 +78,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
                   console.log("enterprise: ",enterprise)
                   return {
                     id: enterprise.id,
+                    logoUrl: enterprise.logoUrl,
                     title: enterprise.name,
                     htmlPreviewContent: enterprise.businessIdea
                   }
