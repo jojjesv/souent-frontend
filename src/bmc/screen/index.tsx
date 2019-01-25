@@ -69,7 +69,9 @@ export default class BMCScreen extends React.Component<Props, State> {
   }
 
   render() {
-    let { state } = this;
+    let { state, props } = this;
+
+    let enterpriseId = state.enterprise ? state.enterprise.id : null
 
     return (
       <div>
@@ -97,6 +99,7 @@ export default class BMCScreen extends React.Component<Props, State> {
         <CardDetailModal
           visible={state.cardDetailVisible}
           data={state.cardDetailData}
+          enterpriseId={enterpriseId}
           onRequestClose={() => this.setState({ cardDetailVisible: false })}
         />
       </div>

@@ -2,9 +2,17 @@ import * as React from 'react';
 import BMCCard from '../../models/BMCCard';
 import './styles.scss';
 import classNames from 'classnames';
+import { timeDiff, timeUnits } from '../../utils';
+import { updateBMCCard } from '../service';
+import TaskIndicator from '../../common/task_indicator';
 
 interface Props {
   visible: boolean;
+
+  /**
+   * Used for updating BMC card (required prop)
+   */
+  enterpriseId: string;
   data: BMCCard;
   onRequestClose: () => void;
 }
@@ -13,6 +21,7 @@ class State {
   fullyVisible: boolean;
   dismissing: boolean;
   editMode: boolean;
+  saveBusy: boolean;
 }
 
 /**
@@ -21,6 +30,7 @@ class State {
  */
 export default class CardDetailModal extends React.Component<Props, State> {
   state = new State();
+  contentRef: HTMLTextAreaElement
 
   dimiss() {
     if (this.state.dismissing) {
@@ -35,14 +45,48 @@ export default class CardDetailModal extends React.Component<Props, State> {
     const animDuration = 350;
 
     setTimeout(() => {
-      this.state.dismissing = false;
+      let mutableState = this.state;
+      mutableState.saveBusy = false;
+      mutableState.editMode = false;
+      mutableState.dismissing = false;
       this.props.onRequestClose();
     }, animDuration);
   }
 
-  toggleEditMode(){
+  toggleEditMode() {
+    this.setState((o: State) => {
+      o.editMode = !o.editMode
+      return o
+    })
+  }
+
+  /**
+   * Saves the changes from edit mode.
+   */
+  async saveChanges() {
+    let { state, props, contentRef } = this;
+    if (state.saveBusy) {
+      //  Busy
+      return;
+    }
+
+    let { data } = props;
+
     this.setState({
-      editMode:!this.state.editMode
+      saveBusy: true
+    })
+
+    let newContent = contentRef.value.trim()
+
+    await updateBMCCard(props.enterpriseId, data.id, {
+      content: newContent
+    });
+
+    data.htmlContent = newContent
+    
+    this.setState({
+      saveBusy: false,
+      editMode: false,
     })
   }
 
@@ -54,6 +98,8 @@ export default class CardDetailModal extends React.Component<Props, State> {
     }
 
     let { data } = props;
+
+    let lastEditDiff = data.lastEdit ? timeDiff(data.lastEdit.getTime()) : null
 
     return (
       <div className={classNames({
@@ -68,20 +114,55 @@ export default class CardDetailModal extends React.Component<Props, State> {
                   <img className="btn-icon" alt="Close" src={"../assets/images/close-icon.png"} />
                 </button>
               </li>
-              <li>
-                <button className="reset" onClick={() => this.toggleEditMode()}>
-                  <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
-                </button>
-              </li>
+              {
+                !state.editMode ? (
+                  <li>
+                    <button className="reset" onClick={() => this.toggleEditMode()}>
+                      <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
+                    </button>
+                  </li>
+                ) : (
+                    <li className="edit-mode-save-container">
+                      <button
+                        className="reset"
+                        disabled={state.saveBusy}
+                        onClick={() => this.saveChanges()}
+                        style={state.saveBusy ? {
+                          visibility: 'hidden'
+                        } : null}>
+                        <img className="btn-icon" alt="Save" src={"../assets/images/check-icon.png"} />
+                      </button>
+                      {
+                        state.saveBusy ? (
+                          <TaskIndicator />
+                        ) : null
+                      }
+                    </li>
+                  )
+              }
             </ul>
           </div>
           <div className="header-container">
             <img alt="symbol" className="symbol" />
             <h1 className="header">{data.title}</h1>
           </div>
-          <textarea disabled={!state.editMode} id="text" className="html-content" dangerouslySetInnerHTML={{ __html: data.htmlContent }}>
-
+          <textarea
+            ref={e => this.contentRef = e}
+            disabled={!state.editMode}
+            className="html-content input"
+            placeholder="No content yet! Edit away.">
+            {
+              data.htmlContent
+            }
           </textarea>
+          <div className="last-edit-container">
+            <p className="text">
+              {
+                lastEditDiff ? `Last edited ${lastEditDiff.delta} ${timeUnits[lastEditDiff.unit]} ago` :
+                  "Not edited yet"
+              }
+            </p>
+          </div>
         </div>
       </div>
     )
