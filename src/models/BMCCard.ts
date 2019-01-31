@@ -8,6 +8,7 @@ export default class {
   public symbolImageUrl: string;
   public htmlContent: string;
   public lastEdit: Date;
+  public imageSrc: string;
 
   /**
    * Used for previewing the card.

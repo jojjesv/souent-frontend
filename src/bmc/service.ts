@@ -19,6 +19,12 @@ export async function fetchBMCCards(enterpriseId: string): Promise<{ bmc: BMCCar
     throw result.error;
   }
 
+  (result.bmc as BMCCard[]).forEach(card => {
+    if (card.lastEdit) {
+      card.lastEdit = new Date(card.lastEdit)
+    }
+  })
+
   return result;
 }
 

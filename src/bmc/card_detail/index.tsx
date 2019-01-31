@@ -8,6 +8,7 @@ import TaskIndicator from '../../common/task_indicator';
 
 interface Props {
   visible: boolean;
+  editable?: boolean;
 
   /**
    * Used for updating BMC card (required prop)
@@ -82,8 +83,9 @@ export default class CardDetailModal extends React.Component<Props, State> {
       content: newContent
     });
 
+    data.lastEdit = new Date();
     data.htmlContent = newContent
-    
+
     this.setState({
       saveBusy: false,
       editMode: false,
@@ -97,9 +99,10 @@ export default class CardDetailModal extends React.Component<Props, State> {
       return null;
     }
 
-    let { data } = props;
+    let { data, editable } = props;
 
-    let lastEditDiff = data.lastEdit ? timeDiff(data.lastEdit.getTime()) : null
+    let hasImageSrc = !!data.imageSrc;
+    let lastEditDiff = data.lastEdit ? timeDiff(Date.now(), data.lastEdit.getTime()) : null
 
     return (
       <div className={classNames({
@@ -115,30 +118,32 @@ export default class CardDetailModal extends React.Component<Props, State> {
                 </button>
               </li>
               {
-                !state.editMode ? (
-                  <li>
-                    <button className="reset" onClick={() => this.toggleEditMode()}>
-                      <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
-                    </button>
-                  </li>
-                ) : (
-                    <li className="edit-mode-save-container">
-                      <button
-                        className="reset"
-                        disabled={state.saveBusy}
-                        onClick={() => this.saveChanges()}
-                        style={state.saveBusy ? {
-                          visibility: 'hidden'
-                        } : null}>
-                        <img className="btn-icon" alt="Save" src={"../assets/images/check-icon.png"} />
+                editable ? (
+                  !state.editMode ? (
+                    <li>
+                      <button className="reset" onClick={() => this.toggleEditMode()}>
+                        <img className="btn-icon" alt="Edit" src={"../assets/images/edit-icon.png"} />
                       </button>
-                      {
-                        state.saveBusy ? (
-                          <TaskIndicator />
-                        ) : null
-                      }
                     </li>
-                  )
+                  ) : (
+                      <li className="edit-mode-save-container">
+                        <button
+                          className="reset"
+                          disabled={state.saveBusy}
+                          onClick={() => this.saveChanges()}
+                          style={state.saveBusy ? {
+                            visibility: 'hidden'
+                          } : null}>
+                          <img className="btn-icon" alt="Save" src={"../assets/images/check-icon.png"} />
+                        </button>
+                        {
+                          state.saveBusy ? (
+                            <TaskIndicator />
+                          ) : null
+                        }
+                      </li>
+                    )
+                ) : null
               }
             </ul>
           </div>
@@ -146,15 +151,34 @@ export default class CardDetailModal extends React.Component<Props, State> {
             <img alt="symbol" className="symbol" />
             <h1 className="header">{data.title}</h1>
           </div>
-          <textarea
-            ref={e => this.contentRef = e}
-            disabled={!state.editMode}
-            className="html-content input"
-            placeholder="No content yet! Edit away.">
+          <div className="html-content">
             {
-              data.htmlContent
+              hasImageSrc || editable ? (
+                <div className={classNames({
+                  "image-container": true,
+                  "has-src": hasImageSrc
+                })}>
+                  {
+                    !hasImageSrc ? (
+                      <div className="no-src">
+                        <img alt="Image" src="/assets/images/image-icon.png" className="img" />
+                        <p className="title">Choose an image</p>
+                      </div>
+                    ) : null
+                  }
+                </div>
+              ) : null
             }
-          </textarea>
+            <textarea
+              ref={e => this.contentRef = e}
+              disabled={!state.editMode}
+              className="input"
+              placeholder="No content yet! Edit away.">
+              {
+                data.htmlContent
+              }
+            </textarea>
+          </div>
           <div className="last-edit-container">
             <p className="text">
               {

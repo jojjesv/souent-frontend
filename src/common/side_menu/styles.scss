@@ -41,4 +41,23 @@
     color: rgba(250, 250, 250, 0.75);
     font-weight: normal;
   }
+
+  .contact-mail {
+    position: absolute;
+    bottom: 18px;
+    left: 24px;
+    color: rgba(250, 250, 250, 0.85);
+    opacity: 0.75;
+    transition: all 250ms;
+
+    .fas {
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    &:hover {
+      transition-duration: 100ms;
+      opacity: 1;
+    }
+  }
 }

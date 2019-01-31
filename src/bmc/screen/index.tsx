@@ -10,6 +10,7 @@ import Enterprise from '../../models/Enterprise';
 import EnterpriseHeader from '../desktop/enterprise_header';
 import EnterpriseInfoHeader from './EnterpriseInfoHeader';
 import './styles.scss';
+import Members from './Members';
 
 class State {
   //  Is initially fetching
@@ -18,7 +19,9 @@ class State {
 
   //  Basic enterprise info
   enterprise: Enterprise;
+  members?: { email: string }[];
   cardDetailVisible: boolean;
+  editable = false;
 
   //  Current card data for card detail view
   cardDetailData: BMCCard;
@@ -93,6 +96,12 @@ export default class BMCScreen extends React.Component<Props, State> {
                   className="bmc"
                   onCardOpen={data => this.setState({ cardDetailData: data, cardDetailVisible: true })}
                 />
+
+                {
+                  state.members ? (
+                    <Members members={state.members} />
+                  ) : null
+                }
               </div>
             )
         }
@@ -100,6 +109,7 @@ export default class BMCScreen extends React.Component<Props, State> {
           visible={state.cardDetailVisible}
           data={state.cardDetailData}
           enterpriseId={enterpriseId}
+          editable={state.editable}
           onRequestClose={() => this.setState({ cardDetailVisible: false })}
         />
       </div>
