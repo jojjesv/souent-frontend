@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { timeDiff, timeUnits } from '../../utils';
 import { updateBMCCard } from '../service';
 import TaskIndicator from '../../common/task_indicator';
+import { uploadCoverImage } from './service';
 
 interface Props {
   visible: boolean;
@@ -22,6 +23,7 @@ class State {
   fullyVisible: boolean;
   dismissing: boolean;
   editMode: boolean;
+  uploadCoverBusy: boolean;
   saveBusy: boolean;
 }
 
@@ -58,6 +60,39 @@ export default class CardDetailModal extends React.Component<Props, State> {
     this.setState((o: State) => {
       o.editMode = !o.editMode
       return o
+    })
+  }
+
+  onCoverImageFileChanged(file: File) {
+    if (!file) {
+      return
+    }
+
+    this.uploadCoverImage(file)
+  }
+
+  async uploadCoverImage(file: File) {
+    let { props } = this
+    let { data } = props
+
+    this.setState({
+      uploadCoverBusy: true
+    })
+
+    try {
+
+      let uploadUrl = await uploadCoverImage(props.enterpriseId, data.id, file);
+      data.imageSrc = uploadUrl
+
+    } catch (e) {
+
+      console.log(e);
+      Notification
+
+    }
+
+    this.setState({
+      uploadCoverBusy: false
     })
   }
 
@@ -105,10 +140,11 @@ export default class CardDetailModal extends React.Component<Props, State> {
     let lastEditDiff = data.lastEdit ? timeDiff(Date.now(), data.lastEdit.getTime()) : null
 
     return (
-      <div className={classNames({
-        "card-detail": true,
-        "dismissing": state.dismissing
-      })} onClick={() => this.dimiss()}>
+      <div
+        className={classNames({
+          "card-detail": true,
+          "dismissing": state.dismissing
+        })} onClick={() => this.dimiss()}>
         <div className="base" onClick={e => e.stopPropagation()}>
           <div className="options">
             <ul>
@@ -160,12 +196,17 @@ export default class CardDetailModal extends React.Component<Props, State> {
                 })}>
                   {
                     !hasImageSrc ? (
-                      <div className="no-src">
+                      <div className="no-src" >
                         <img alt="Image" src="/assets/images/image-icon.png" className="img" />
                         <p className="title">Choose an image</p>
                       </div>
                     ) : null
                   }
+                  <label className="file-label">
+                    <input type="file"
+                      className="hidden"
+                      onChange={e => this.onCoverImageFileChanged(e.currentTarget.files[0])} />
+                  </label>
                 </div>
               ) : null
             }
