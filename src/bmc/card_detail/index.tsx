@@ -117,9 +117,16 @@ export default class CardDetailModal extends React.Component<Props, State> {
 
     let newContent = contentRef.value.trim()
 
+    try {
     await updateBMCCard(props.enterpriseId, data.id, {
       content: newContent
     });
+    } catch (e) {
+      console.log(e)
+      Notification.showWithFirstShared(
+        "Whoops, an error occurred"
+      )
+    }
 
     data.lastEdit = new Date();
     data.htmlContent = newContent
