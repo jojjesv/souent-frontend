@@ -4,5 +4,11 @@ import DefaultRouter from './DefaultRouter'
 import './styles.scss';
 import './forms.scss';
 import './fixed_header.scss';
+import Notification from 'jojje-react-notification'
 
-ReactDOM.render(<DefaultRouter />, document.getElementById("main"));
+ReactDOM.render((
+  <>
+    <DefaultRouter />
+    <Notification shared />
+  </>
+), document.getElementById("main"));
