@@ -8,6 +8,7 @@ import MemberListItem from './member_list_item';
 import {
   Redirect, Link
 } from 'react-router-dom';
+import Notification from 'jojje-react-notification';
 
 class State {
   additionalMembers: MemberData[] = [];
@@ -50,14 +51,24 @@ export default class EnterpriseForm extends React.Component<any, State> {
     // @ts-ignore
     let formData = new FormData(formElement);
 
-    // @ts-ignore
-    let result = await submitEnterprise(formData);
+    try {
 
-    this.setState({
-      submitted: true,
-      createdEnterpriseId: result.id,
-      busySubmitting: false
-    })
+      // @ts-ignore
+      let result = await submitEnterprise(formData);
+      this.setState({
+        submitted: true,
+        createdEnterpriseId: result.id,
+        busySubmitting: false
+      })
+
+    } catch (e) {
+      console.log(e)
+      Notification.showWithFirstShared("Whoops, an error occurred");
+
+      this.setState({
+        busySubmitting: false
+      })
+    }
   }
 
   addMember() {
