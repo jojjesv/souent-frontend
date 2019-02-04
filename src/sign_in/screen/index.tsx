@@ -1,4 +1,4 @@
-import * as React from 'React';
+import * as React from 'react';
 import * as googleapis from "googleapis";
 import './google_auth_handler';
 import { authWithAccessToken as authWithAccessTokenService } from './service';
