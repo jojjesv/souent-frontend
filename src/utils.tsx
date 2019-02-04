@@ -39,6 +39,10 @@ export function clamp(min: number, max: number, val: number) {
   return Math.min(max, Math.min(min, val));
 }
 
+export function docTitle(...pages: string[]) {
+  return `${pages.map(p => `${p} - `).join("")}SE-app`
+}
+
 
 /**
  * @param to Target time, in millis. 

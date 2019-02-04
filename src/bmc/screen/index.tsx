@@ -11,6 +11,7 @@ import EnterpriseHeader from '../desktop/enterprise_header';
 import EnterpriseInfoHeader from './EnterpriseInfoHeader';
 import './styles.scss';
 import Members from './Members';
+import { docTitle } from '../../utils';
 
 class State {
   //  Is initially fetching
@@ -39,6 +40,7 @@ export default class BMCScreen extends React.Component<Props, State> {
   state = new State();
 
   componentDidMount() {
+    document.title = docTitle("BMC")
     this.fetchWithPathParam();
   }
 
@@ -64,6 +66,8 @@ export default class BMCScreen extends React.Component<Props, State> {
     });
 
     let result = await fetchBMCCards(enterpriseId);
+
+    document.title = docTitle(result.enterprise.name, "BMC")
 
     this.setState({
       ...result,

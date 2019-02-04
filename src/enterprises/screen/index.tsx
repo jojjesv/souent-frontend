@@ -6,6 +6,7 @@ import CardList from '../../common/card_list'
 import './desktop.scss'
 import { Link } from 'react-router-dom';
 import SideMenu from '../../common/side_menu';
+import { docTitle } from '../../utils';
 
 class State {
   fetchingEnterprises = false;
@@ -25,6 +26,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
   state = new State();
 
   componentDidMount() {
+    document.title = docTitle("Enterprises")
     this.fetchEnterprises();
   }
 
