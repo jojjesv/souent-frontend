@@ -6,6 +6,7 @@ import { timeDiff, timeUnits } from '../../utils';
 import { updateBMCCard } from '../service';
 import TaskIndicator from '../../common/task_indicator';
 import { uploadCoverImage } from './service';
+import Notification from 'jojje-react-notification'
 
 interface Props {
   visible: boolean;
@@ -87,7 +88,9 @@ export default class CardDetailModal extends React.Component<Props, State> {
     } catch (e) {
 
       console.log(e);
-      Notification
+      Notification.showWithFirstShared(
+        "Whoops, an error occurred"
+      );
 
     }
 
@@ -190,10 +193,14 @@ export default class CardDetailModal extends React.Component<Props, State> {
           <div className="html-content">
             {
               hasImageSrc || editable ? (
-                <div className={classNames({
-                  "image-container": true,
-                  "has-src": hasImageSrc
-                })}>
+                <div
+                  className={classNames({
+                    "image-container": true,
+                    "has-src": hasImageSrc
+                  })}
+                  style={hasImageSrc ? {
+                    backgroundImage: `url(${data.imageSrc})`
+                  } : null}>
                   {
                     !hasImageSrc ? (
                       <div className="no-src" >
