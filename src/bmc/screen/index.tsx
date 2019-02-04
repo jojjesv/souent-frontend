@@ -65,9 +65,12 @@ export default class BMCScreen extends React.Component<Props, State> {
 
     let result = await fetchBMCCards(enterpriseId);
 
+    console.log(result.members)
+
     this.setState({
       ...result,
-      busyFetching: false
+      busyFetching: false,
+      members: result.members
     });
   }
 

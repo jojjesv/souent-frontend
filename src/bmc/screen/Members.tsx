@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './styles.scss';
 
 interface Props {
   members: { email: string }[];
@@ -10,19 +11,22 @@ export default class extends React.PureComponent<Props> {
     let { members } = props;
 
     return (
-      <ul className="member-list">
-        {
-          members.map(member => (
-            <li>
-              <p className="email">
-              {
-                member.email
-              }
-              </p>
-            </li>
-          ))
-        }
-      </ul>
+      <div className="member-list">
+        <h3>Contact us: </h3>
+        <ul>
+          {
+            members.map(member => (
+              <li>
+                <p className="email"> 
+                  {
+                    member.email
+                  }
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     )
   }
 }
