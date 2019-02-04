@@ -71,7 +71,8 @@ export default class BMCScreen extends React.Component<Props, State> {
 
     this.setState({
       ...result,
-      busyFetching: false
+      busyFetching: false,
+      members: result.members
     });
   }
 

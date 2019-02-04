@@ -60,7 +60,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
           <Link to="/enterprise/new">
             <span className="fas fa-plus"></span>
           </Link>
-          <h1 className="seh-header">Social Enterprise hub</h1>
+          <h1 className="frontpage-header">Social Enterprise hub</h1>
           <a role="button" onClick={() => this.setState({
             sideMenuOpen: true
           })}>
