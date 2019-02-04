@@ -15,3 +15,13 @@ export async function uploadCoverImage(enterpriseId: string, cardId: string, fil
 
   return url
 }
+
+/**
+ * Injects <a> tags where URLs are present.
+ */
+export function injectAnchorTags(original: string){
+  return original.replace(
+    /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/ig,
+    '<a href="$1">$1</a>'
+  )
+}

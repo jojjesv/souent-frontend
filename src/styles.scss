@@ -21,3 +21,9 @@ button.reset {
   border: none;
   background: none;
 }
+
+
+/* Keep notification on top */
+.notification {
+  z-index: 1000;
+}

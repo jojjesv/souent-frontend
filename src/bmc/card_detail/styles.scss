@@ -117,13 +117,14 @@
       }
     }
 
-    .input {
+    .content {
       font-size: 150%;
       resize: none;
       flex-grow: 1;
-      background: #fff;
+      padding: .375em .625em; /* Blame bulma */
 
-      &[disabled] {
+      &[disabled],
+      &p {
         background: transparent;
         cursor: default;
         border: none;
@@ -131,6 +132,10 @@
         &::placeholder {
           color: #9e9e9e;
         }
+      }
+
+      &textarea {
+        background: #fff;
       }
   
       &::placeholder {

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { timeDiff, timeUnits } from '../../utils';
 import { updateBMCCard } from '../service';
 import TaskIndicator from '../../common/task_indicator';
-import { uploadCoverImage } from './service';
+import { uploadCoverImage, injectAnchorTags } from './service';
 import Notification from 'jojje-react-notification'
 
 interface Props {
@@ -217,15 +217,22 @@ export default class CardDetailModal extends React.Component<Props, State> {
                 </div>
               ) : null
             }
-            <textarea
-              ref={e => this.contentRef = e}
-              disabled={!state.editMode}
-              className="input"
-              placeholder="No content yet! Edit away.">
-              {
-                data.htmlContent
-              }
-            </textarea>
+            {
+              state.editMode ? (
+                <textarea
+                  ref={e => this.contentRef = e}
+                  className="input content"
+                  placeholder="No content yet! Edit away.">
+                  {
+                    data.htmlContent
+                  }
+                </textarea>
+              ) : (
+                <p className="content" dangerouslySetInnerHTML={{
+                  __html: injectAnchorTags(data.htmlContent)
+                }}></p>
+              )
+            }
           </div>
           <div className="last-edit-container">
             <p className="text">
