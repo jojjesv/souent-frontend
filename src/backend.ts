@@ -8,7 +8,9 @@
 //import fetch from 'whatwg-fetch';
 
 import * as Cookie from 'js-cookie';
-let baseUrl = `http://localhost:8004/api`;
+
+let dev = window.location.origin.indexOf(':808') != -1
+let baseUrl = dev ? `http://localhost:8004/api` : `/api`;
 
 /**
  * Performs a standard backend request.
