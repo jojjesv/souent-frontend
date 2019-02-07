@@ -43,6 +43,11 @@ export default class GoogleSignInButton extends React.Component<any, State> {
   }
 
   onSignedIn(gUser: any) {
+    let profile = gUser.getBasicProfile();
+
+    //  Used in enterprise form
+    (window as any).userProfileEmail = profile.getEmail();
+
     let accessToken = gUser.getAuthResponse().id_token;
     this.fetchAuthToken(accessToken);
 

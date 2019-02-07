@@ -209,7 +209,7 @@ export default class EnterpriseForm extends React.Component<any, State> {
               <div>
                 <ul id="member-list">
                   {
-                    [{ email: 'jojjedeveloper@gmail.com' }].concat(state.additionalMembers).map((member, i) => (
+                    [{ email: ((window as any).userProfileEmail as string) }].concat(state.additionalMembers).map((member, i) => (
                       <MemberListItem
                         index={i}
                         isMe={i == 0}
