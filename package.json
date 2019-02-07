@@ -40,7 +40,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "googleapis": "^35.0.0",
-    "jojje-react-notification": "git+ssh://git@gitlab.com/plasmaCheeseJoj/jojje-react-notification.git",
+    "jojje-react-notification": "https://gitlab.com/plasmaCheeseJoj/jojje-react-notification.git",
     "js-cookie": "^2.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
