@@ -7,11 +7,13 @@ import './desktop.scss'
 import { Link } from 'react-router-dom';
 import SideMenu from '../../common/side_menu';
 import { docTitle } from '../../utils';
+import '../../sign_in/screen/google_auth_handler'
 
 class State {
   fetchingEnterprises = false;
   enterprises: Enterprise[] = [];
   sideMenuOpen = false;
+  signedIn = false
 }
 
 interface Props {
@@ -28,6 +30,26 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
   componentDidMount() {
     document.title = docTitle("Enterprises")
     this.fetchEnterprises();
+    this.addSignedInListener();
+  }
+
+  addSignedInListener() {
+    let alreadySignedIn = (window as any).googleSignedIn;
+    console.log("alreadySignedIn: " + alreadySignedIn)
+    if (alreadySignedIn) {
+      this.setState({
+        signedIn: true
+      });
+    } else {
+      //  attach listener
+      console.log("adding listener...");
+      (window as any).onGoogleSignedInListeners.add(() => {
+        console.log("onGoogleSignedInListeners");
+        this.setState({
+          signedIn: true
+        })
+      })
+    }
   }
 
   /**
@@ -57,9 +79,16 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
     return (
       <div>
         <header className="enterprises-header fixed">
-          <Link to="/enterprise/new">
-            <span className="fas fa-plus"></span>
-          </Link>
+          {
+            state.signedIn ? (
+              <Link to="/enterprise/new">
+                <span className="fas fa-plus"></span>
+              </Link>
+            ) : (
+                //  Nonce
+                <div></div>
+              )
+          }
           <h1 className="frontpage-header">Social Enterprise hub</h1>
           <a role="button" onClick={() => this.setState({
             sideMenuOpen: true
@@ -78,7 +107,7 @@ export default class EnterprisesScreen extends React.Component<Props, State> {
                   return `/bmc/${d.id}`
                 }}
                 data={state.enterprises.map(enterprise => {
-                  console.log("enterprise: ",enterprise)
+                  console.log("enterprise: ", enterprise)
                   return {
                     id: enterprise.id,
                     logoUrl: enterprise.logoUrl,

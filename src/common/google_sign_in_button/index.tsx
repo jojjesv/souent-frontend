@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { fetchAuthToken } from './service';
+import '../../sign_in/screen/google_auth_handler'
 
 let mountedButtons: GoogleSignInButton[] = []
 
@@ -41,9 +42,12 @@ export default class GoogleSignInButton extends React.Component<any, State> {
     } catch (e) { }
   }
 
-  onSignedIn(gUser) {
+  onSignedIn(gUser: any) {
     let accessToken = gUser.getAuthResponse().id_token;
     this.fetchAuthToken(accessToken);
+
+    let remainingListeners: Set<(user: any) => any> = (window as any).onGoogleSignedInListeners;
+    remainingListeners.forEach(e => e(gUser));
   }
 
   async fetchAuthToken(accessToken: string) {
